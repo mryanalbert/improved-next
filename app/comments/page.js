@@ -22,9 +22,7 @@ export default async function UsersPage() {
     redirect('/')
   }
 
-  // const [comments, photos] = await Promise.all([getComments(), getPhotos()])
-  const comments = await getComments()
-  const photos = await getPhotos()
+  const [comments, photos] = await Promise.all([getComments(), getPhotos()])
 
   return (
     <>
