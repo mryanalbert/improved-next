@@ -6,12 +6,12 @@ import { Suspense } from "react"
 import Photos from "./photos"
 
 const getComments = async () => {
-  const res = await fetch('https://jsonplaceholder.typicode.com/comments', { cache: 'no-store' })
+  const res = await fetch('https://jsonplaceholder.typicode.com/comments')
   return res.json()
 }
 
 const getPhotos = async () => {
-  const res = await fetch('https://jsonplaceholder.typicode.com/photos', { cache: 'no-store' })
+  const res = await fetch('https://jsonplaceholder.typicode.com/photos')
   return res.json()
 }
 
