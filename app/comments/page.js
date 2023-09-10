@@ -2,7 +2,6 @@ import { getServerSession } from "next-auth"
 import { options } from "../api/auth/[...nextauth]/options"
 import { redirect } from "next/navigation"
 import Comments from "./comments"
-import { Suspense } from "react"
 import Photos from "./photos"
 
 const getComments = async () => {
@@ -26,15 +25,11 @@ export default async function UsersPage() {
 
   return (
     <>
-      <h1>Comments:</h1>
-      <Suspense fallback={<h2>Loading comments...</h2>}>
-        <Comments comments={comments} />
-      </Suspense>
+      {/* <h1>Comments:</h1>
+      <Comments comments={comments} /> */}
 
       <h1>Photos:</h1>
-      <Suspense fallback={<h2>Loading photos...</h2>}>
-        <Photos photos={photos} />
-      </Suspense>
+      <Photos photos={photos} />
     </>
   )
 }

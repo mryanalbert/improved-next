@@ -14,8 +14,9 @@ export const options = {
 
         if (username == 'admin' && password == 'admin1') {
           return { name: 'Ryan', email: 'r@gmail.com', password: 'admin1' }
+        } else {
+          return null
         }
-        console.log('Invalid')
       }
     })
   ],

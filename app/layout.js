@@ -1,4 +1,5 @@
 import AuthProvider from "./components/AuthProvider"
+import TanstackProvider from "./components/TanstackProvider"
 
 export const metadata = {
   title: 'Create Next App',
@@ -10,7 +11,9 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <body>
         <AuthProvider>
-          {children}
+          <TanstackProvider>
+            {children}
+          </TanstackProvider>
         </AuthProvider>
       </body>
     </html>

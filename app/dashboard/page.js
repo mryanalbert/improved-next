@@ -6,7 +6,6 @@ import Image from "next/image"
 
 export default async function Dashboard() {
   const session = await getServerSession(options)
-  console.log(session)
   if (!session) {
     redirect('/')
   }
@@ -14,7 +13,6 @@ export default async function Dashboard() {
   return (
     <>
       <ClientDashboard session={session.user} />
-      <Image src={'https://via.placeholder.com/600/e5109'} width={600} height={600} alt={'df'}/>
     </>
   )
 }
