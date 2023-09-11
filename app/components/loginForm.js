@@ -1,37 +1,41 @@
-'use client'
+"use client";
 
-import { signIn } from "next-auth/react"
-import { useEffect, useState } from "react"
-import { useForm } from "react-hook-form"
-import { useRouter } from "next/navigation"
+import { signIn } from "next-auth/react";
+import { useEffect, useState } from "react";
+import { useForm } from "react-hook-form";
+import { useRouter } from "next/navigation";
 
 export default function LoginForm() {
-  const router = useRouter()
+  const router = useRouter();
 
-  const { register, handleSubmit, watch, formState: { errors } } = useForm()
-  const [loggingIn, setLoggingIn] = useState(false)
+  const {
+    register,
+    handleSubmit,
+    watch,
+    formState: { errors },
+  } = useForm();
+  const [loggingIn, setLoggingIn] = useState(false);
 
   useEffect(() => {
-    const subscription = watch(value => {})
-    return () => subscription.unsubscribe()
-  }, [watch])
+    const subscription = watch((value) => {});
+    return () => subscription.unsubscribe();
+  }, [watch]);
 
-  const onSubmit = async data => {
-    setLoggingIn(true)
-    const res = await signIn('credentials', { ...data, redirect: false })
-    
+  const onSubmit = async (data) => {
+    setLoggingIn(true);
+    const res = await signIn("credentials", { ...data, redirect: false });
+    console.log(res);
     if (res.error) {
-      setLoggingIn(false)
+      setLoggingIn(false);
     }
 
     if (res.error == null) {
-      router.push('/dashboard')
-    } 
-  }
-
+      router.push("/dashboard");
+    }
+  };
 
   if (loggingIn) {
-    return <h1>Logging in...</h1>
+    return <h1>Logging in...</h1>;
   }
 
   return (
@@ -42,11 +46,11 @@ export default function LoginForm() {
           type="text"
           id="username"
           {...register("username", {
-            required: "Username is required"
-          })} 
+            required: "Username is required",
+          })}
         />
       </div>
-      <p style={{color: 'red'}}>{errors?.username?.message}</p>
+      <p style={{ color: "red" }}>{errors?.username?.message}</p>
 
       <div>
         <label htmlFor="pass">Password:</label>
@@ -54,13 +58,13 @@ export default function LoginForm() {
           type="password"
           id="pass"
           {...register("password", {
-            required: "Password is required"
+            required: "Password is required",
           })}
         />
       </div>
-      <p style={{color: 'red'}}>{errors?.password?.message}</p>
+      <p style={{ color: "red" }}>{errors?.password?.message}</p>
 
       <input type="submit" value="Login" />
     </form>
-  )
+  );
 }

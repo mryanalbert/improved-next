@@ -1,38 +1,38 @@
 import CredentialsProvider from "next-auth/providers/credentials";
-import GithubProvider from "next-auth/providers/github"
+import GithubProvider from "next-auth/providers/github";
 
 export const options = {
-  session: {
-    strategy: "jwt",
-  },
-  secret: 'kdjdkfjd',
+  jwt: { maxAge: 60 * 5 },
+  session: { strategy: "jwt", maxAge: 60 * 5 },
+  secret: process.env.NEXTAUTH_SECRET,
   providers: [
     CredentialsProvider({
-      name: 'Credentials',
+      name: "Credentials",
       async authorize(credentials) {
-        const { username, password } = credentials
+        const { username, password } = credentials;
 
-        if (username == 'admin' && password == 'admin1') {
-          return { name: 'Ryan', email: 'r@gmail.com', password: 'admin1' }
+        if (username == "admin" && password == "admin1") {
+          console.log({
+            name: "Ryan",
+            email: "r@gmail.com",
+            password: "admin1",
+          });
+          return { name: "Ryan", email: "r@gmail.com", password: "admin1" };
         } else {
-          return null
+          return null;
         }
-      }
-    })
+      },
+    }),
   ],
   callbacks: {
     async session({ session, token, user }) {
       // Send properties to the client, like an access_token and user id from a provider.
-      session.accessToken = token.accessToken
-      session.user.id = token.id
-      return session
+      session.accessToken = token.accessToken;
+      session.user.id = token.id;
+      return session;
     },
-    jwt({ token, account, user }) {
-      if (account) {
-        token.accessToken = account.access_token
-        token.id = user.id
-      }
-      return token
-    }
-  }
-}
+    async jwt({ token, user, account, profile, isNewUser }) {
+      return token;
+    },
+  },
+};
